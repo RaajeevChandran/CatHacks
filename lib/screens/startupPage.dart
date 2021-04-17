@@ -35,10 +35,10 @@ class _StartUpPageState extends State<StartUpPage> {
                       children: [
                         Material(
                           borderRadius: BorderRadius.circular(20),
-                          clipBehavior: Clip.antiAliasWithSaveLayer,
+                          clipBehavior: Clip.antiAlias,
                           child: Ink(
                               width: 260,
-                              height: 60,
+                              height: 50,
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(20),
                                   gradient: gradient_butt),
@@ -63,22 +63,26 @@ class _StartUpPageState extends State<StartUpPage> {
                         SizedBox(height: 10),
                         Material(
                           borderRadius: BorderRadius.circular(20),
-                          clipBehavior: Clip.antiAliasWithSaveLayer,
+                          clipBehavior: Clip.antiAlias,
                           child: Ink(
                               width: 260,
-                              height: 60,
+                              height: 50,
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(20),
                                   gradient: gradient2),
                               child: InkWell(
                                 onTap: () {
-                                  print("Dfd");
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              TeacherPortal()));
                                 },
                                 child: Center(
                                   child: Padding(
                                       padding: EdgeInsets.all(10),
                                       child: Text(
-                                        "I'm a Student",
+                                        "For Students",
                                         style: font_def,
                                       )),
                                 ),

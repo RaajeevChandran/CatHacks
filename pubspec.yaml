@@ -36,6 +36,12 @@ dependencies:
   easy_gradient_text: ^1.0.0
   lottie:
   http:
+  animated_progress_button: ^1.0.2+1
+  animated_text_kit: ^4.2.0
+  filepicker_windows: ^2.0.0
+  dotted_border: ^2.0.0
+  rflutter_alert: ^2.0.2
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
