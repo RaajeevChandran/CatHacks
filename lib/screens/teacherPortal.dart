@@ -1,6 +1,7 @@
 import 'package:animated_progress_button/animated_progress_button.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:cathacks/constants.dart';
+import 'package:dotted_border/dotted_border.dart';
 import 'package:easy_gradient_text/easy_gradient_text.dart';
 import 'package:filepicker_windows/filepicker_windows.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +15,8 @@ class TeacherPortal extends StatefulWidget {
 
 class _TeacherPortalState extends State<TeacherPortal> {
   final animatedButtonController = AnimatedButtonController();
+  final textController = TextEditingController();
+  String text;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,11 +41,17 @@ class _TeacherPortalState extends State<TeacherPortal> {
               SizedBox(),
               Padding(
                 padding: const EdgeInsets.all(15.0),
-                child: TextField(
-                  decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Colors.white,border:InputBorder.none),
-                  maxLines: 30,
+                child: DottedBorder(
+                  color: Colors.black,
+                  strokeWidth: 0.5,
+                  child: TextField(
+                    controller: textController,
+                    decoration: InputDecoration(
+                        filled: true,
+                        fillColor: Colors.white,
+                        border: InputBorder.none),
+                    maxLines: 30,
+                  ),
                 ),
               ),
               AnimatedButton(
@@ -58,47 +67,65 @@ class _TeacherPortalState extends State<TeacherPortal> {
                   animatedButtonController.reset();
                 },
               ),
-              SizedBox(height:10),
-              Text('Or',style:TextStyle(fontSize: 20.0,)),
-              SizedBox(height: 10,),
+              SizedBox(height: 10),
+              Text('Or',
+                  style: TextStyle(
+                    fontSize: 20.0,
+                  )),
+              SizedBox(
+                height: 10,
+              ),
               Material(
-                          borderRadius: BorderRadius.circular(20),
-                          clipBehavior: Clip.antiAlias,
-                          child: Ink(
-                              width: 400,
-                              height: 50,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  gradient: gradient_butt),
-                              child: InkWell(
-                                onTap: () {
+                borderRadius: BorderRadius.circular(20),
+                clipBehavior: Clip.antiAlias,
+                child: Ink(
+                    width: 400,
+                    height: 50,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        gradient: gradient_butt),
+                    child: InkWell(
+                      onTap: () async {
+                        String text2 = await selectFile();
+                        setState(() {
+                          textController.text = text2;
+                        });
+                        
 
-                                },
-                                child: Center(
-                                  child: Padding(
-                                      padding: EdgeInsets.all(10),
-                                      child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        crossAxisAlignment: CrossAxisAlignment.center,
-                                        children: [
-                                          Icon(Icons.add),
-                                          Text(
-                                            "Select a .txt file",
-                                            style: font_def,
-                                          ),
-                                        ],
-                                      )),
+                      },
+                      child: Center(
+                        child: Padding(
+                            padding: EdgeInsets.all(10),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Icon(Icons.add),
+                                Text(
+                                  "Select a .txt file",
+                                  style: font_def,
                                 ),
-                              )),
-                        ),
+                              ],
+                            )),
+                      ),
+                    )),
+              ),
             ],
           ),
         ));
   }
 }
 
-void selectFile(){
-  final file = OpenFilePicker()..filterSpecification={};
+Future<String> selectFile() async {
+  final file = OpenFilePicker()
+    ..filterSpecification = {'Text Document (* txt)': '*.txt'}
+    ..title = 'Select a file';
+  final result = file.getFile();
+  if (result != null) {
+    print(result.path);
+    String text = await result.readAsString();
+    print(text);
+    return text;
+  }
+  return null;
 }
-
-
