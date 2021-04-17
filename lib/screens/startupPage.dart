@@ -32,10 +32,12 @@ class _StartUpPageState extends State<StartUpPage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         GestureDetector(
-                          onTap: () {print('oth');},
+                          onTap: () {
+                            print('oth');
+                          },
                           child: Container(
                               width: 260,
-                              height:60,
+                              height: 60,
                               alignment: Alignment.center,
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(20),
@@ -50,7 +52,7 @@ class _StartUpPageState extends State<StartUpPage> {
                         SizedBox(height: 10),
                         Container(
                             width: 260,
-                            height:60,
+                            height: 60,
                             alignment: Alignment.center,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(20),
@@ -61,13 +63,16 @@ class _StartUpPageState extends State<StartUpPage> {
                                   "For Students",
                                   style: font_def,
                                 ))),
-                        
                       ]),
                 ),
               ),
             ),
           ),
-          Align(alignment: Alignment.bottomCenter,child: GradientText(text:'Made with ❤️ at CatHacks',style:GoogleFonts.roboto(fontSize: 30.0,color:Colors.white)))
+          Align(
+              alignment: Alignment.bottomCenter,
+              child: Text('Made with ❤️ at CatHacks',
+                  style:
+                      GoogleFonts.roboto(fontSize: 30.0, color: Colors.white)))
         ],
       ),
     );
