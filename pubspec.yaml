@@ -33,6 +33,7 @@ dependencies:
   flutter_icons: any
   google_fonts: any
   easy_gradient_text: ^1.0.0
+  lottie:
 dev_dependencies:
   flutter_test:
     sdk: flutter

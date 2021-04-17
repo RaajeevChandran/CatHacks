@@ -7,6 +7,8 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nice_button/nice_button.dart';
 
+import 'teacherPortal.dart';
+
 class StartUpPage extends StatefulWidget {
   @override
   _StartUpPageState createState() => _StartUpPageState();
@@ -32,9 +34,7 @@ class _StartUpPageState extends State<StartUpPage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         GestureDetector(
-                          onTap: () {
-                            print('oth');
-                          },
+                          onTap: () {Navigator.push(context,MaterialPageRoute(builder: (context)=>TeacherPortal()));},
                           child: Container(
                               width: 260,
                               height: 60,
@@ -68,11 +68,7 @@ class _StartUpPageState extends State<StartUpPage> {
               ),
             ),
           ),
-          Align(
-              alignment: Alignment.bottomCenter,
-              child: Text('Made with ❤️ at CatHacks',
-                  style:
-                      GoogleFonts.roboto(fontSize: 30.0, color: Colors.white)))
+          Align(alignment: Alignment.bottomCenter,child: GradientText(colors:[Color(0xFFb92b27),Color(0xFF1565C0)],text:'Made with 🖤 at CatHacks',style:GoogleFonts.roboto(fontSize: 30.0,color:Colors.white)))
         ],
       ),
     );
