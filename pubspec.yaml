@@ -32,8 +32,10 @@ dependencies:
   nice_button: any
   flutter_icons: any
   google_fonts: any
+  filepicker_windows: ^2.0.0
   easy_gradient_text: ^1.0.0
   lottie:
+  http:
 dev_dependencies:
   flutter_test:
     sdk: flutter

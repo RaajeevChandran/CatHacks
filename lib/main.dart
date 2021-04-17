@@ -6,7 +6,6 @@ void main() {
   runApp(MyApp());
   doWhenWindowReady(() {
     final win = appWindow;
-   
     win.alignment = Alignment.center;
     win.title = "";
     win.show();
