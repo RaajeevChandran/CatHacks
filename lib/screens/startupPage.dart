@@ -33,43 +33,74 @@ class _StartUpPageState extends State<StartUpPage> {
                   child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        GestureDetector(
-                          onTap: () {Navigator.push(context,MaterialPageRoute(builder: (context)=>TeacherPortal()));},
-                          child: Container(
+                        Material(
+                          borderRadius: BorderRadius.circular(20),
+                          clipBehavior: Clip.antiAlias,
+                          child: Ink(
                               width: 260,
-                              height:60,
-                              alignment: Alignment.center,
+                              height: 50,
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(20),
                                   gradient: gradient_butt),
-                              child: Padding(
-                                  padding: EdgeInsets.all(10),
-                                  child: Text(
-                                    "For Teachers",
-                                    style: font_def,
-                                  ))),
+                              child: InkWell(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              TeacherPortal()));
+                                },
+                                child: Center(
+                                  child: Padding(
+                                      padding: EdgeInsets.all(10),
+                                      child: Text(
+                                        "For Teachers",
+                                        style: font_def,
+                                      )),
+                                ),
+                              )),
                         ),
                         SizedBox(height: 10),
-                        Container(
-                            width: 260,
-                            height:60,
-                            alignment: Alignment.center,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20),
-                                gradient: gradient2),
-                            child: Padding(
-                                padding: EdgeInsets.all(10),
-                                child: Text(
-                                  "For Students",
-                                  style: font_def,
-                                ))),
+                        Material(
+                          borderRadius: BorderRadius.circular(20),
+                          clipBehavior: Clip.antiAlias,
+                          child: Ink(
+                              width: 260,
+                              height: 50,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  gradient: gradient2),
+                              child: InkWell(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              TeacherPortal()));
+                                },
+                                child: Center(
+                                  child: Padding(
+                                      padding: EdgeInsets.all(10),
+                                      child: Text(
+                                        "For Students",
+                                        style: font_def,
+                                      )),
+                                ),
+                              )),
+                        ),
                         
                       ]),
                 ),
               ),
             ),
           ),
-          Align(alignment: Alignment.bottomCenter,child: GradientText(colors:[Color(0xFFb92b27),Color(0xFF1565C0)],text:'Made with 🖤 at CatHacks',style:GoogleFonts.roboto(fontSize: 30.0,color:Colors.white)))
+          Align(
+              alignment: Alignment.bottomCenter,
+              child: GradientText(
+                  colors: [Color(0xFFb92b27), Color(0xFF1565C0)],
+                  text: 'Made with 🖤 at CatHacks',
+                  style:
+                      GoogleFonts.roboto(fontSize: 30.0, color: Colors.white)))
         ],
       ),
     );
