@@ -42,6 +42,8 @@ dependencies:
   rflutter_alert: ^2.0.2
   dio:
   excel: ^1.1.5
+  collapsible_sidebar:
+  rounded_loading_button: ^1.0.18
 
 dev_dependencies:
   flutter_test:

@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:cathacks/constants.dart';
+import 'package:cathacks/screens/studentPortal.dart';
 import 'package:easy_gradient_text/easy_gradient_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
@@ -76,7 +77,7 @@ class _StartUpPageState extends State<StartUpPage> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              TeacherPortal()));
+                                              StudentScreen()));
                                 },
                                 child: Center(
                                   child: Padding(
