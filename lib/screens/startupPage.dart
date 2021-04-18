@@ -82,7 +82,7 @@ class _StartUpPageState extends State<StartUpPage> {
                                   child: Padding(
                                       padding: EdgeInsets.all(10),
                                       child: Text(
-                                        "For Students",
+                                        "I'm a Student",
                                         style: font_def,
                                       )),
                                 ),
