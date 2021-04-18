@@ -28,17 +28,29 @@ class _TeacherPortalState extends State<TeacherPortal> {
           child: Column(
             children: [
               SizedBox(height: 20.0),
-              AnimatedTextKit(
-                isRepeatingAnimation: true,
-                animatedTexts: [
-                  ColorizeAnimatedText(
-                      "Type a paragraph to generate questions!",
-                      textStyle: GoogleFonts.poppins(fontSize: 30.0),
-                      colors: [
-                        Color(0xFF833ab4),
-                        Color(0xFFfd1d1d),
-                        Color(0xFFfcb045)
-                      ])
+              Row(
+                // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  IconButton(
+                    icon: Icon(Icons.arrow_back_ios_outlined),
+                    onPressed: () => Navigator.pop(context),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                    child: AnimatedTextKit(
+                      isRepeatingAnimation: true,
+                      animatedTexts: [
+                        ColorizeAnimatedText(
+                            "Type a paragraph to generate questions!",
+                            textStyle: GoogleFonts.poppins(fontSize: 30.0),
+                            colors: [
+                              Color(0xFF833ab4),
+                              Color(0xFFfd1d1d),
+                              Color(0xFFfcb045)
+                            ])
+                      ],
+                    ),
+                  ),
                 ],
               ),
               SizedBox(),
@@ -46,14 +58,14 @@ class _TeacherPortalState extends State<TeacherPortal> {
                 padding: const EdgeInsets.all(15.0),
                 child: DottedBorder(
                   color: Colors.black,
-                  strokeWidth: 0.5,
+                  dashPattern: [1, 1],
                   child: TextField(
                     controller: textController,
                     decoration: InputDecoration(
                         filled: true,
                         fillColor: Colors.white,
                         border: InputBorder.none),
-                    maxLines: 30,
+                    maxLines: 22,
                   ),
                 ),
               ),
@@ -80,8 +92,9 @@ class _TeacherPortalState extends State<TeacherPortal> {
                 },
               ),
               SizedBox(height: 10),
-              Text('Or',
+              Text('OR',
                   style: TextStyle(
+                    color: Colors.grey,
                     fontSize: 20.0,
                   )),
               SizedBox(
@@ -92,7 +105,7 @@ class _TeacherPortalState extends State<TeacherPortal> {
                 clipBehavior: Clip.antiAlias,
                 child: Ink(
                     width: 400,
-                    height: 50,
+                    height: 90,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
                         gradient: gradient_butt),
@@ -107,12 +120,18 @@ class _TeacherPortalState extends State<TeacherPortal> {
                         child: Padding(
                             padding: EdgeInsets.all(10),
                             child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
-                                Icon(Icons.add),
+                                Container(
+                                  height: 60,
+                                  width: 60,
+                                  child: DottedBorder(
+                                      color: Colors.grey,
+                                      dashPattern: [1, 1],
+                                      child: Center(child: Icon(Icons.add))),
+                                ),
                                 Text(
-                                  "Select a .txt file",
+                                  "Add a file",
                                   style: font_def,
                                 ),
                               ],
