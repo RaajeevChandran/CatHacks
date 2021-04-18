@@ -41,7 +41,7 @@ dependencies:
   dotted_border: ^2.0.0
   rflutter_alert: ^2.0.2
   dio:
-  excel:
+  excel: ^1.1.5
 
 dev_dependencies:
   flutter_test:

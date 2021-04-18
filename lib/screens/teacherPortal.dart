@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:animated_progress_button/animated_progress_button.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:cathacks/constants.dart';
+import 'package:cathacks/models/quiz.dart';
 import 'package:cathacks/utils/toExcel.dart';
 import 'package:dio/dio.dart';
 import 'package:dotted_border/dotted_border.dart';
@@ -80,7 +81,7 @@ class _TeacherPortalState extends State<TeacherPortal> {
                   FormData formData =
                       FormData.fromMap({'text': textController.text});
                   var result = await Dio().post(
-                      'http://e68fe2f9f4b6.ngrok.io/quiz',
+                      'http://aeee097aa4c5.ngrok.io/quiz',
                       data: formData);
                   List<Quiz> quiz = [];
                   result.data.forEach((foo) {
@@ -155,7 +156,9 @@ class _TeacherPortalState extends State<TeacherPortal> {
                         DialogButton(
                           onPressed: () {},
                           child: Text('Save as .txt File?'),
-                        )
+                        ),DialogButton(onPressed: (){
+                          toExcel(quiz);
+                        },child:Text('Save as Excel file'))
                       ]).show();
                   animatedButtonController
                       .completed(); // call when you get the response
@@ -218,22 +221,7 @@ class _TeacherPortalState extends State<TeacherPortal> {
   }
 }
 
-class Quiz {
-  String answer;
-  String question;
-  Quiz.fromMap(dynamic data) {
-    answer = data['answer'];
-    question = data['question'];
-  }
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['answer'] = this.answer;
-    data['question'] = this.question;
-    return data;
-  }
 
-  Quiz({this.answer, this.question});
-}
 
 Future<String> selectFile() async {
   final file = OpenFilePicker()
