@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:animated_progress_button/animated_progress_button.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:cathacks/constants.dart';
+import 'package:cathacks/utils/toExcel.dart';
 import 'package:dio/dio.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:easy_gradient_text/easy_gradient_text.dart';
@@ -84,7 +87,21 @@ class _TeacherPortalState extends State<TeacherPortal> {
                   Alert(
                       context: context,
                       title: 'Your summarized text',
-                      content: Column(children: [Text(result.data.toString()),]),buttons: [DialogButton(child: Text('Save as .txt File?'),)]).show();
+                      content: Column(children: [
+                        Text(result.data.toString()),
+                      ]),
+                      buttons: [
+                        DialogButton(
+                          child: Text('Save as .txt File?'),
+                        ),
+                        DialogButton(
+                          child: Text('Save as .xslx file?'),
+                          onPressed: ()async {
+                            Map<String,dynamic> map = jsonDecode(result.data);
+                            await toExcel(map);
+                          },
+                        )
+                      ]).show();
                   animatedButtonController
                       .completed(); // call when you get the response
                   await Future.delayed(Duration(seconds: 2));
@@ -105,7 +122,7 @@ class _TeacherPortalState extends State<TeacherPortal> {
                 clipBehavior: Clip.antiAlias,
                 child: Ink(
                     width: 400,
-                    height: 90,
+                    height: 60,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
                         gradient: gradient_butt),
@@ -118,18 +135,19 @@ class _TeacherPortalState extends State<TeacherPortal> {
                       },
                       child: Center(
                         child: Padding(
-                            padding: EdgeInsets.all(10),
+                            padding: EdgeInsets.all(8),
                             child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Container(
-                                  height: 60,
-                                  width: 60,
+                                  height: 30,
+                                  width: 30,
                                   child: DottedBorder(
                                       color: Colors.grey,
                                       dashPattern: [1, 1],
                                       child: Center(child: Icon(Icons.add))),
                                 ),
+                                SizedBox(width:10),
                                 Text(
                                   "Add a file",
                                   style: font_def,
@@ -144,7 +162,6 @@ class _TeacherPortalState extends State<TeacherPortal> {
         ));
   }
 }
-
 
 Future<String> selectFile() async {
   final file = OpenFilePicker()
