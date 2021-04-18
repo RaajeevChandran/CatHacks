@@ -79,12 +79,81 @@ class _TeacherPortalState extends State<TeacherPortal> {
                   var result = await Dio().post(
                       'http://e68fe2f9f4b6.ngrok.io/quiz',
                       data: formData);
-                  print(result.data);
+                  List<Quiz> quiz = [];
+                  result.data.forEach((foo) {
+                    quiz.add(Quiz.fromMap(foo));
+                  });
+                  print(quiz);
 
                   Alert(
+                      title: " ",
                       context: context,
-                      title: 'Your summarized text',
-                      content: Column(children: [Text(result.data.toString()),]),buttons: [DialogButton(child: Text('Save as .txt File?'),)]).show();
+                      content: Container(
+                        width: MediaQuery.of(context).size.width * .5,
+                        child: Column(
+                            children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(1.0),
+                                    child: AnimatedTextKit(
+                                      isRepeatingAnimation: true,
+                                      animatedTexts: [
+                                        ColorizeAnimatedText(
+                                            "The Auto-Generated Quiz",
+                                            textStyle: GoogleFonts.poppins(
+                                                fontSize: 30.0),
+                                            colors: [
+                                              Color(0xFF833ab4),
+                                              Color(0xFFfd1d1d),
+                                              Color(0xFFfcb045)
+                                            ])
+                                      ],
+                                    ),
+                                  ),
+                                ] +
+                                List.generate(quiz.length, (int index) {
+                                  return Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Material(
+                                      elevation: 3,
+                                      child: Container(
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(15),
+                                          ),
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              .5,
+                                          height: 120,
+                                          child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Text(
+                                                    "Q : " +
+                                                        quiz[index].question,
+                                                    style: TextStyle(
+                                                        fontSize: 25,
+                                                        fontWeight:
+                                                            FontWeight.bold)),
+                                                Text(
+                                                    "A : " + quiz[index].answer,
+                                                    style: TextStyle(
+                                                        fontSize: 21,
+                                                        fontWeight:
+                                                            FontWeight.w700,
+                                                        color: Colors.grey))
+                                              ])),
+                                    ),
+                                  );
+                                })),
+                      ),
+                      buttons: [
+                        DialogButton(
+                          onPressed: () {},
+                          child: Text('Save as .txt File?'),
+                        )
+                      ]).show();
                   animatedButtonController
                       .completed(); // call when you get the response
                   await Future.delayed(Duration(seconds: 2));
@@ -145,6 +214,22 @@ class _TeacherPortalState extends State<TeacherPortal> {
   }
 }
 
+class Quiz {
+  String answer;
+  String question;
+  Quiz.fromMap(dynamic data) {
+    answer = data['answer'];
+    question = data['question'];
+  }
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['answer'] = this.answer;
+    data['question'] = this.question;
+    return data;
+  }
+
+  Quiz({this.answer, this.question});
+}
 
 Future<String> selectFile() async {
   final file = OpenFilePicker()
