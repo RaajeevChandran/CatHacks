@@ -1,6 +1,7 @@
 import 'package:animated_progress_button/animated_progress_button.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:cathacks/constants.dart';
+import 'package:dio/dio.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:easy_gradient_text/easy_gradient_text.dart';
 import 'package:filepicker_windows/filepicker_windows.dart';
@@ -8,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import "package:http/http.dart" as http;
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 class TeacherPortal extends StatefulWidget {
   @override
@@ -60,8 +62,17 @@ class _TeacherPortalState extends State<TeacherPortal> {
                 text: "Submit",
                 controller: animatedButtonController,
                 onPressed: () async {
-                  await Future.delayed(Duration(
-                      seconds: 5)); // simulated your API requesting time.
+                  FormData formData =
+                      FormData.fromMap({'text': textController.text});
+                  var result = await Dio().post(
+                      'http://e68fe2f9f4b6.ngrok.io/quiz',
+                      data: formData);
+                  print(result.data);
+
+                  Alert(
+                      context: context,
+                      title: 'Your summarized text',
+                      content: Column(children: [Text(result.data.toString()),]),buttons: [DialogButton(child: Text('Save as .txt File?'),)]).show();
                   animatedButtonController
                       .completed(); // call when you get the response
                   await Future.delayed(Duration(seconds: 2));
@@ -91,8 +102,6 @@ class _TeacherPortalState extends State<TeacherPortal> {
                         setState(() {
                           textController.text = text2;
                         });
-                        
-
                       },
                       child: Center(
                         child: Padding(
@@ -116,6 +125,7 @@ class _TeacherPortalState extends State<TeacherPortal> {
         ));
   }
 }
+
 
 Future<String> selectFile() async {
   final file = OpenFilePicker()
