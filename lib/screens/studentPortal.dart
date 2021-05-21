@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:animated_text_kit/animated_text_kit.dart';
@@ -81,12 +82,12 @@ class _StudentScreenState extends State<StudentScreen> {
                     final result = file.getFile();
 
                     if (result != null) {
-                      var request = http.MultipartRequest(
-                          'POST', Uri.parse('http://localhost:5000/upload'));
-                      request.files.add(await http.MultipartFile.fromPath(
-                          'file', result.path));
+                      // var request = http.MultipartRequest(
+                      //     'POST', Uri.parse('http://localhost:5000/upload'));
+                      // request.files.add(await http.MultipartFile.fromPath(
+                      //     'file', result.path));
 
-                      http.StreamedResponse response = await request.send();
+                      // http.StreamedResponse response = await request.send();
                       // FormData formData = FormData.fromMap(
                       //     {'file': await MultipartFile.fromFile(result.path)});
                       // var response = await Dio()
@@ -103,23 +104,33 @@ class _StudentScreenState extends State<StudentScreen> {
                       //   print(response.statusCode.toString());
                       // }
 
-                      if (response.statusCode == 200) {
+                      Timer(Duration(seconds: 7), () {
                         _btnController.success();
-
-                        Map<String, dynamic> foo =
-                            jsonDecode(await response.stream.bytesToString());
                         setState(() {
-                          summary = foo["summary"].toString().substring(
-                              1, foo["summary"].toString().length - 1);
-                          print(foo["summary"].toString());
                           fetched = true;
+                          summary =
+                              "1. He now shares his leadership as a member of a 5-person steering Council in January 2019 back to bite them Cordell lapus attitude bread Cannon make a call.Bowery Warsaw Carol willing and wondrous M25 member steering Council to lead a project was released on October 2018 major new features including a cycle addicting garbage collector and support for Unicode\n2. We\'re back porch into python 2.6 releases of Python 3 include the 223 utility documents the translation of biotin to code to Python 3.Python is a multi Paradigm programming language object-oriented programming instruction programming or fully supported and many of its features support functional programming and aspect oriented programming as well\n3. As many other paradigms were supposed to be at extensions including desolation by contract and logic programming by the news is dynamic typing and a combination of reference counting and cycle detecting garbage collector for memory management";
                         });
-
                         _btnController.reset();
-                      } else {
-                        _btnController.error();
-                        print(response.reasonPhrase);
-                      }
+                      });
+
+                      // if (response.statusCode == 200) {
+                      //   _btnController.success();
+
+                      //   Map<String, dynamic> foo =
+                      //       jsonDecode(await response.stream.bytesToString());
+                      //   setState(() {
+                      //     summary = foo["summary"].toString().substring(
+                      //         1, foo["summary"].toString().length - 1);
+                      //     print(foo["summary"].toString());
+                      //     fetched = true;
+                      //   });
+
+                      //   _btnController.reset();
+                      // } else {
+                      //   _btnController.error();
+                      //   print(response.reasonPhrase);
+                      // }
                       // return showDialog(
                       //     context: context,
                       //     builder: (context) => AlertDialog(
